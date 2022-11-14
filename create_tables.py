@@ -27,6 +27,7 @@ def create_tables(cursor):
 
     # Motif
     motif_table = """CREATE TABLE motif (
+    ID text,
     Chromosome text,
     Start text,
     End text,
@@ -37,18 +38,17 @@ def create_tables(cursor):
     Length text,
     Unit_proc_ID text,
     Threshold text,
-    ID text,
     PRIMARY KEY(ID));"""
     cursor.execute(motif_table)
 
     # Gene
     gene_table = """CREATE TABLE gene (
+    Name text,
     Chromosome text,
     Start text,
     End text,
-    Name text,
-    PGN_expression text,
     DN_expression text,
     Length text,
+    PGN_expression text,
     PRIMARY KEY(Name));"""
     cursor.execute(gene_table)
