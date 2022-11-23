@@ -1,18 +1,18 @@
 import sqlite3 as sql
 from create_tables import create_tables
 from display import display, display_att
-from input import input_to, delete_from
+from input import input_to, delete_from, input_to_dn, input_to_pgn, input_to_gene, input_to_motif
+import pandas as pd
 
 if __name__ == "__main__":
     conn = sql.connect('database.db')
     cursor = conn.cursor()
-
-    # create_tables(cursor)
-    # conn.commit()
-
-    # cursor.execute("SELECT * FROM gene WHERE name = \"Th\"")
-    # for row in cursor.fetchall():
-    #     print(row)
+    
+    # input_to_dn(cursor)
+    # input_to_pgn(cursor)
+    input_to_motif(cursor)
+    # input_to_gene(conn)
+    conn.commit()
 
     while True :
         query = input("""

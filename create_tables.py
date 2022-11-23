@@ -1,54 +1,54 @@
 import sqlite3 as sql
 
 def create_tables(cursor):
-    # Chromosome
-    chromosome_table = """CREATE TABLE chromosome (
-    Number text,
-    Cell_type text,
-    PRIMARY KEY(Number));"""
-    cursor.execute(chromosome_table)
+    # Interaction
+    dn_interaction_table = """CREATE TABLE dn_interactions (
+    Chromosome STRING,
+    Locus_1_start INT,
+    Locus_1_end INT,
+    Locus_2_start INT,
+    Locus_2_end INT
+    );"""
+    cursor.execute(dn_interaction_table)
 
     # Interaction
-    interaction_table = """CREATE TABLE interaction (
-    Locus1 text,
-    Locus2 text,
-    ID INT,
-    PRIMARY KEY(ID));"""
-    cursor.execute(interaction_table)
+    pgn_interaction_table = """CREATE TABLE pgn_interactions (
+    Chromosome STRING,
+    Locus_1_start INT,
+    Locus_1_end INT,
+    Locus_2_start INT,
+    Locus_2_end INT
+    );"""
+    cursor.execute(pgn_interaction_table)
 
     # Locus
     locus_table = """CREATE TABLE locus (
-    Chromosome text,
-    Start text,
-    End text,
+    Chromosome STRING,
+    Start INT,
+    End INT,
     ID INT,
     PRIMARY KEY(ID));"""
-    cursor.execute(locus_table)
+    # cursor.execute(locus_table)
 
     # Motif
     motif_table = """CREATE TABLE motif (
-    ID text,
-    Chromosome text,
-    Start text,
-    End text,
-    Name text,
-    Family_name text,
-    Quality text,
-    Entrex text,
-    Length text,
-    Unit_proc_ID text,
-    Threshold text,
-    PRIMARY KEY(ID));"""
+    Name STRING,
+    Family_name STRING,
+    Quality STRING,
+    Entrez INT,
+    Length INT,
+    Uni_proc_ID STRING,
+    PRIMARY KEY(Name));"""
     cursor.execute(motif_table)
 
     # Gene
     gene_table = """CREATE TABLE gene (
-    Name text,
-    Chromosome text,
-    Start text,
-    End text,
-    DN_expression text,
-    Length text,
-    PGN_expression text,
+    Name STRING,
+    Chromosome STRING,
+    Start INT,
+    End INT,
+    DN_expression REAL,
+    Length INT,
+    PGN_expression REAL,
     PRIMARY KEY(Name));"""
     cursor.execute(gene_table)
