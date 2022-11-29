@@ -1,7 +1,8 @@
 import sqlite3 as sql
 from create_tables import create_tables
 from display import display, display_att
-from input import input_to, delete_from, input_to_dn, input_to_pgn, input_to_gene, input_to_motif
+from input import input_to, delete_from, input_to_dn, input_to_pgn, input_to_gene, input_to_motif, input_to_dn_motif, input_to_pgn_motif
+from queries import query_1, query_2, query_3, query_4, query_5
 import pandas as pd
 
 if __name__ == "__main__":
@@ -10,9 +11,11 @@ if __name__ == "__main__":
     
     # input_to_dn(cursor)
     # input_to_pgn(cursor)
-    input_to_motif(cursor)
-    # input_to_gene(conn)
-    conn.commit()
+    # input_to_motif(cursor)
+    # input_to_gene(cursor)
+    # input_to_dn_motif(cursor)
+    # input_to_pgn_motif(cursor)
+    # conn.commit()
 
     while True :
         query = input("""
@@ -21,7 +24,8 @@ if __name__ == "__main__":
         3. Display a table
         4. Display an entity from some query
         5. Delete an entity from a table
-        6. Exit
+        6. Queries
+        7. Exit
         
         """)
 
@@ -34,7 +38,7 @@ if __name__ == "__main__":
             1. Interaction
             2. Locus
             3. Motif
-            4. Gene 
+            4. Gene
             """)
             if table == "1":
                 display("interaction", cursor)
@@ -65,7 +69,7 @@ if __name__ == "__main__":
             4. Gene 
             """)
             if table == "1":
-                display("interaction", cursor)
+                display("dn_interaction", cursor)
             elif table == "2":
                 display("locus", cursor)
             elif table == "3":
@@ -123,6 +127,32 @@ if __name__ == "__main__":
             else:
                 print("sorry try again")
         elif query == "6":
+            q = input("""Which query:
+            1. Interactions specific to a cell type
+            2. Signature motif pairs
+            3. Interesting interactions
+            4. Genes expressed differently between cell types
+            5. Expressed genes in the interesting interactions
+            """)
+            if q == "1":
+                cell = input ("Which cell type:\n1. DN\n2. PGN ")
+                query_1(cell, cursor)
+                conn.commit()
+            elif q == "2":                
+                cell = input ("Which cell type:\n1. DN\n2. PGN ")
+                query_2(cell, conn)
+                conn.commit()
+            elif q == "3":
+                query_3(cursor)
+                conn.commit()
+            elif q == "4":
+                step = input ("Which step:")
+                query_4(step, cursor)
+            elif q == "5":
+                query_5(cursor)
+            else:
+                print("sorry not an option")
+        elif query == "7":
             conn.close()
             break
         else:
